@@ -1,0 +1,65 @@
+<div class="border p-5 mt-5 shadow">
+  <h4>Formulario Cliente</h4>
+  <form [formGroup]="AltaForm" (ngSubmit)="Enviar(AltaForm.value)">
+    <input
+      class="form-control mt-2"
+      disabled
+      type="number"
+      formControlName="id"
+      placeholder="id"
+    />
+    <input
+      class="form-control mt-2"
+      type="text"
+      formControlName="nombre"
+      placeholder="nombre"
+    />
+    <div
+      *ngIf="
+        AltaForm.get('nombre').hasError('required') &&
+        AltaForm.get('nombre').touched
+      "
+      class="badge rounded-pill bg-danger"
+    >
+      Este campo es requerido
+    </div>
+    <input
+      class="form-control mt-2"
+      type="text"
+      formControlName="cif"
+      placeholder="CIF"
+    />
+    <div
+      *ngIf="
+        AltaForm.get('cif').hasError('required') &&
+        AltaForm.get('cif').touched
+      "
+      class="badge rounded-pill bg-danger"
+    >
+      Este campo es requerido
+    </div>
+    <input
+      class="form-control mt-2"
+      type="text"
+      formControlName="direccion"
+      placeholder="direccion"
+    />
+    <div
+      *ngIf="
+        AltaForm.get('direccion').hasError('required') &&
+        AltaForm.get('direccion').touched
+      "
+      class="badge rounded-pill bg-danger"
+    >
+      Este campo es requerido
+    </div>
+    <select class="form-select mt-2" (change)="cambiarGrupo($event)">
+      <option *ngFor="let grupo of _ClienteService.getGrupo()">
+        {{ grupo.nombre }}
+      </option>
+    </select>
+    <button class="btn btn-primary mt-2" [disabled]="AltaForm.invalid">
+      Enviar
+    </button>
+  </form>
+</div>
